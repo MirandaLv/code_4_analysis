@@ -28,7 +28,8 @@ for row in rawData:
 			trans_val_code = field.split("_")[0]
 			trans_year = field.split("_")[1]
 			newrow["project_id"] = row["AMP ID"]
-			newrow["project_title"] = row["Project Title"]
+			newrow["transaction_original_date"] = ""
+			newrow["transaction_isodate"] = ""
 			newrow["transaction_year"] = trans_year
 			newrow["transaction_value_code"] = trans_val_code
 			newrow["transaction_value"] = row[field]
