@@ -13,10 +13,12 @@ import sys
 #reload(sys)
 #sys.setdefaultencoding('utf-8')
 
-loc=r"/home/mirandalv/repos/uganda-geocoded-dataset/scratch/level0/locations/aiddata_toolkit.csv"
+loc=r"/home/mirandalv/repos/minerva-geocoded-dataset/iraq/output/level0/sample.csv"
 
 data = pandas.read_csv(loc, sep='\t') # Locations Level 0 file
-gid = list( data.geoname_id )
+newdata = dict()
+newtitle = []
+gid = list( data.GEONAME_ID )
 place_names = [] # Will be populated with place names directly from GeoNames API
 latls = []
 lngls = []
@@ -92,15 +94,21 @@ def main():
     print "line number:", count
     print "url: ", url
     print '-'*30
+  
+  
+  newtitle = ['project_id', 'geoname_id', 'precision_code', 'place_name', 'latitude', 'longitude', 'location_type_code', 'geoname_adm_code', 'geonames_adm_name']
+  newdata['project_id'] = data.PROJECT_ID
+  newdata['geoname_id'] = data.GEONAME_ID	
+  newdata['precision_code'] = data.PRECISION_CODE
+  newdata['place_name'] = place_names
+  newdata['latitude'] = latls
+  newdata['longitude'] = lngls
+  newdata['location_type_code'] = loctypels
+  newdata['geoname_adm_code'] = countadmcodels
+  newdata['geonames_adm_name'] = countadmnamels
+  df = pandas.DataFrame.from_dict(newdata)
 
-
-  data['place_name'] = place_names
-  data['latitude'] = latls
-  data['longitude'] = lngls
-  data['location_type_code'] = loctypels
-  data['geoname_adm_code'] = countadmcodels
-  data['geonames_adm_name'] = countadmnamels
-  data.to_csv('locations_UG.tsv', sep='\t', encoding='utf-8', index=False)
+  df.to_csv('locations_iraq.tsv', sep='\t', columns=newtitle, header=newtitle, encoding='utf-8', index=False)
 
   print "SUCCESS"
 
