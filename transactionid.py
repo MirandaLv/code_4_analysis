@@ -6,8 +6,8 @@ import uuid
 from pandas import DataFrame as df
 import pandas as pd
 
-inf = r"/home/mirandalv/repos/nepal-geocoded-dataset/products/Level_0/transactions.tsv"
-outf = r"/home/mirandalv/repos/nepal-geocoded-dataset/products/Level_0/transactions_id.tsv"
+inf = r"/home/mirandalv/repos/minerva-geocoded-dataset/iraq/output/transactions.tsv"
+outf = r"/home/mirandalv/repos/minerva-geocoded-dataset/iraq/output/transactions_id.tsv"
 
 data = pd.read_csv(inf, sep='\t')
 
